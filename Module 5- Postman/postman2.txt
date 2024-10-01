@@ -1,0 +1,28 @@
+
+1. Headers 
+2. CORS - allowing all domains i.e using * is a bad practice 
+4. base64 
+5. What does bearer mean in bearer token? 
+6. Where does request origins from is also mentioned in headers?
+7. Read about cookie based authentication
+8. session based authentication
+9. headers are useful for - cors, cookie in headers
+
+Key points:
+1. In basic auth username and password are sent in headers which are encoded using basic 64 encoding
+2. Browser storage management - cookie, local, session , index
+3. local storage, session storage and cookie are all domain specific
+	- cookie will always expire
+	- session storage last for session (i.e as long as the tabs are open)
+	- local storage lasts unless deleted manually
+
+4. Respone header is different from request header as it has status code
+
+
+Doubts:
+1. when a key is passed as query param why is not it visible in the url
+2. Difference between bearer token and jwt bearer
+
+HW
+Server side storage
+ssh

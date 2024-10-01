@@ -1,0 +1,61 @@
+POSTMAN
+1. Used for API testing
+2. For testing an api we get a collection 
+ Collection : A group of API
+3. Api development workflow: Local -> dev ->staging -> production
+4. Syntax for using a variable -> {{variable_name}}
+
+
+
+
+TASKS:
+1. Creation of variables - Global and scope based
+2. How to share a collection- export/Import
+3. Authorization vs authentication.
+4. Types of data in req body: 
+	- Usecases of form-data and json data while making a request
+	- What is binary used for
+	a. form-data: Form-data represents the data sent from website forms to APIs as part of multipart/form-data. The form-data option in Postman simulates filling out a form on a website and submitting it. This can also be used for attaching files to the keys as well. 
+
+	b. x-www-form-urlencoded: The URL-encoded data sends encoded data to the server, and uses the same encoding as that of the URL parameters. This is also known as the default content type. 
+
+	c. raw: As the name suggests, raw data can consist of anything. Postman doesn’t touch the raw string or make any type of alterations to it. The string added into the raw editor goes unmodified, except for replacing the defined environment variables. The following types are supported:
+		Text
+		Javascript
+		JSON
+		HTML
+		XML
+
+5. Resource- country, state, city: Create endpoints to understand folder structure
+6. Sample response.
+7. Scripts
+ - Pre-script
+ - Post-script: Write a post script for login and save the token to environment variables and send it with all the further request (hit json placeholder open api)
+
+
+
+Read:
+1. JS vs JSON
+2. Passing array as a query parameter
+3. filtering using url e.g get countries with population greater then a specific figure.
+4. Collection, environment, 
+5. Read auth types.
+
+
+Doubts:
+1. Environment and collection scope
+2. Secret and  secret vault
+
+Report:
+1. Status codes
+2. Exploring Postman: 
+	- How to set different types of variables in postman
+	- what are built in variables in postman and the syntax to refer variables
+	- What does different types of req body mean in postman
+	- What are scripts in postman and different types of scripts and their usecases
+	- completed the tasks
+	- task to understand folder structure in postman
+3. What is oauth and difference bw oauth 1.0 and oauth 2.0
+4. MVC - Model has data and business login related to data, View is engine that renders HTTP, and controller (This pattern is used for server side rendering)
+
+

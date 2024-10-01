@@ -1,0 +1,79 @@
+CRUD Opearions
+
+db.users.insertOne({})
+
+db.users.find( {
+... name: { $exists: false }
+... }
+)
+
+db.users.find( { _id: "66fa78ba8c73ccd33d964033" } )
+
+* set
+db.users.update( 
+... { _id: ObjectId("66fa78ba8c73ccd33d964033") },
+... { $set: { name: "Jyoti"} }
+)
+
+db.users.findOneAndUpdate( 
+	{ _id: ObjectId("66fa78ba8c73ccd33d964033") } , 
+	{ $set: { hobbies: "Journaling"} }
+)
+
+db.users.findOneAndUpdate( 
+	{ _id: ObjectId("66fa78ba8c73ccd33d964033") } , 
+	{ $set: { hobbies: [ "Journaling" ]} }
+)
+
+
+db.users.updateMany( { name: { $exists: true } }, { $set: { hasName: true } } );
+
+* push
+db.users.findOneAndUpdate( 
+	{ _id: ObjectId("66fa78ba8c73ccd33d964033") },
+	{ $push : { hobbies: "Drawing" } }
+)
+
+* count
+db.users.find( { hasName: true } ).count()
+
+* set sets the value of a field in document
+db.users.updateOne( { name: "Jyoti" } , { $set : { phone: [12345, 57799, 89008] } })
+
+* unset removes the field from the document
+db.users.updateOne( { name: "Jyoti" } , { $unset : { phone: "" } })
+
+* pull
+db.users.updateOne( { _id: ObjectId("66fa89f78c73ccd33d964034") }, { $pull : { progress: "unset" } })
+
+* each is used to add or remove multiple elements from an array
+db.users.updateOne( { _id: ObjectId("66fa89f78c73ccd33d964034") }, { $push : { progress: { $each: ["unset", "exists" ] } } } )
+
+* increment
+db.users.updateOne( { name: "Test user" }, { $inc : { score: 3 } } )
+
+*regex
+db.movies.find( { fullplot: { $regex: { $option: "i", value: "Africa" } } }, { title: true, fullplot: true } )
+
+
+* min max	
+db.users.findOneAndUpdate( { name: "Jyoti" }, { $min: { score: 2 } } )
+
+db.users.findOneAndUpdate( { name: "Jyoti" }, { $max: { score: 10 } } )
+
+* and
+db.movies.find( { $and: [ { year: { $lt: 2014} }, { year: { $gt: 2007 } } ] } ).count();
+
+* and or
+db.movies.find( { $and: [ { year: { $eq: 2015 } }, { $or: [ { type: "tvseries" }, { genres: { $in: ["Drama"] } } ] } ] }, { type: true, genres: true} ).limit(5)
+
+
+* skip, limit and sort -> sort, limit, skip 
+db.users.find( {}, { name: true, email: true } ).skip(100).sort( { name: 1 } ).limit(5);
+db.users.find( {}, { name: true, email: true } ).skip(100).limit(5).sort( { name: 1 } );
+
+db.users.updateOne({ name: "Test user" }, { $pop: { progress: -1 } } )
+
+
+
+

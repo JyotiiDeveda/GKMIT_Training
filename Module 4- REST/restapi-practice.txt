@@ -1,0 +1,135 @@
+METHODS -> endpoints for User
+
+1. 	url: localhost:5000/app/users
+	method: POST
+	body: {
+	 user name, email, details
+	}
+	resposne: {
+		msg
+	},
+	status - 201
+
+2. 	url: localhost:5000/app/users
+	method: GET
+	body: {}
+	resposne: {
+		array of users
+	},
+	status - 200
+
+3. 	url: localhost:5000/app/users/:id
+	method: PUT
+	body: {
+		user object to be updated/replaced
+	}
+	resposne: {
+		updated object (optional)
+		msg
+	},
+	status - 204
+
+4. 	url: localhost:5000/app/users
+	method: PATCH
+	body: {
+		field to be updated
+	}
+	resposne: {
+		updated object (optional)
+		msg
+	},
+	status - 204
+
+5. 	url: localhost:5000/app/users/:id
+	method: DELETE
+	body: {}
+	resposne: {
+		msg
+	},
+	status - 204
+
+
+
+
+* Resource name is plural in endpoint by convention
+
+
+METHODS -> Endpoints for posts
+1. 	url: localhost:5000/app/posts
+	method - GET
+	body - {}
+	response - {
+	  array of ids of posts
+	}
+	status - 200
+
+
+
+2.	url: localhost:5000/app/posts
+	method - POST
+	body - {
+	  userid,
+	  post_title,
+	  post_content
+	}
+	response - {
+	  msg
+	}
+	status - 201
+
+
+
+3.	url: localhost:5000/app/posts/:id
+	method - PUT
+	body - {
+	  post object
+	}
+	response - {
+	  updated post object
+	}
+	status - 200
+
+
+
+3.	url: localhost:5000/app/posts/:id
+	method - PATCH
+	body - {
+	  field to be updated
+	}
+	response - {
+	  updated post
+	}
+	status - 200
+
+
+4.	url: localhost:5000/app/posts/:id
+	method - DELETE
+	body - {}
+	response - {
+	  msg
+	}
+	status - 204
+
+
+5.	url: localhost:5000/app/users/:id/posts
+	method - GET
+	body - {}
+	response - {
+	  array of user's posts
+	}
+	status - 200
+
+
+6.	url: localhost:5000/app/users/:id/posts?start_date=yyyyddmm&end_date=yyyyddmm
+	method - GET
+	body - {}
+	response - {
+	  array of required posts
+	}
+	status - 204
+
+
+Endpoint for nested resources
+/users/:id/address
+
+

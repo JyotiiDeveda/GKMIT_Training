@@ -1,0 +1,46 @@
+This is a description file for git training session, now resolve conflicts 
+
+Git Basics: 
+1. What is git, why it is used? 
+2. Basic git commands 
+	- git status 
+	- git init 
+	- git add 
+	- git commit 
+	- git pull 
+	- git push 
+	- git branch 
+	- git checkout -b <branchname> 
+	- git merge 
+	- git switch 
+	- git merge --continue 
+	- git merge --abort 
+
+3. Types of branches in git
+	- main/master/prod - production
+	- Stage/preprod - staging
+	- release
+	- bugfix
+	- hotfix
+
+
+4. How a new branch is created and merged. 
+5. Merging branch can be:
+	- fast forward
+	- Three way merging
+
+6. What is a git conflict, how git conflicts occur and how to resolve it. 
+5. How to create a pull request. 
+
+6. How to remove a file(untrack) from github repository once pushed?
+	- Add and commit all the changes
+	- Remove all the files from the repository by using : git rm -r --cached
+	The above command will remove all the files from the github repository but they are in the system
+	- Now add and commit all the files.
+Ref: https://dev.to/ademola_isr/how-to-gitignore-untrack-files-already-pushed-to-github-repository-1h96
+
+
+7. Learned git merge
+   - Fast forward
+   - Three way merge
+

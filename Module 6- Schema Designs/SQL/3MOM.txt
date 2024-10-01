@@ -1,0 +1,35 @@
+MOM
+Date: 26-09-2024
+Name: Jyoti Deveda
+Session Title: Inner join and Subqueries
+
+Summary:
+	1. Queries using inner join
+	2. Doubt resolution related to given task 
+	3. How to write sub queries?
+	4. Syntax of subquery
+	5. where and having clause with group by
+	6. Subqueries can be written in different parts of the query
+		- select
+		- where
+		- join
+
+
+Task to do:
+	Read about the following topics and prepare to present
+	- Transactions
+	- Views
+	- Materialized views
+	- Case
+	- Array and JSON and JSONB
+
+
+session and connection, a connection can have multiple sessions, a session for each user, and session is terminated once
+Partial commit - 
+Transaction
+Views
+Materialized views: when data does not update frequently 
+hooks
+sql-practice.com to practice
+
+

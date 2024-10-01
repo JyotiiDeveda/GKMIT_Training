@@ -1,0 +1,1199 @@
+{
+	"info": {
+		"_postman_id": "94e01df5-82c4-4a3d-814b-3dc7d28a90f1",
+		"name": "Chinook API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38476514",
+		"_collection_link": "https://nodejs-team-8364.postman.co/workspace/Nodejs-Team-Workspace~f8b65aba-be17-4ce0-85ae-2974c60340f8/collection/38476514-94e01df5-82c4-4a3d-814b-3dc7d28a90f1?action=share&source=collection_link&creator=38476514"
+	},
+	"item": [
+		{
+			"name": "Artists",
+			"item": [
+				{
+					"name": "Artist-albums",
+					"item": [
+						{
+							"name": "Album-tracks",
+							"item": [
+								{
+									"name": "Create track",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = {",
+													" msg: \"Track created successfully\",",
+													" createdTrack: {trackobj}",
+													"}",
+													"",
+													"// status code: 201",
+													"",
+													"// Query - ",
+													"// INSERT into \"Track\" (\"Name\", \"MediaTypeId\", \"GenreId\", \"Composer\", \"Milliseconds\", \"Bytes\", \"UnitPrice\")",
+													"// VALUES ('Test track', 3, 5, 'Test composer', 578867, 67689, 0.98);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Name\": \"Sample track name\",\n    \"MediaTypeId\": \"12e232\",\n    \"GenreId\": \"97098\", \n    \"Composer\": \"Test composer\",\n    \"Milliseconds\": 689,\n    \"Bytes\": \"24235\",\n    \"UnitPrice\": 13123\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/albums/:AlbumId/tracks",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"albums",
+												":AlbumId",
+												"tracks"
+											],
+											"variable": [
+												{
+													"key": "AlbumId",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all tracks",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = {",
+													"    msg: \"Fetched tracks successfully\",",
+													"    tracks: [",
+													"        {",
+													"            \"TrackId\": 12,",
+													"            \"Name\": \"Sample track name\",",
+													"            \"AlbumId\": \"86690980\",",
+													"            \"MediaTypeId\": \"12e232\",",
+													"            \"GenreId\": \"97098\", ",
+													"            \"Composer\": \"Test composer\",",
+													"            \"Milliseconds\": 689,",
+													"            \"Bytes\": 24235,",
+													"            \"UnitPrice\": 13123",
+													"        }",
+													"    ]",
+													"}",
+													"",
+													"// status code: 200",
+													"",
+													"// select ",
+													"//     *",
+													"// from ",
+													"//     \"Track\"  as T",
+													"// join \"Album\" as A",
+													"// on T.\"AlbumId\"=A.\"AlbumId\"",
+													"// where ",
+													"//     A.\"AlbumId\"=12;"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/albums/:AlbumId/tracks",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"albums",
+												":AlbumId",
+												"tracks"
+											],
+											"variable": [
+												{
+													"key": "AlbumId",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update a track",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = {",
+													"    msg: \"Updated track\",",
+													"}",
+													"",
+													"// status code = 204 (If updated track is not returned in response)",
+													"",
+													"// Query -",
+													"// UPDATE ",
+													"// \t\"Track\"",
+													"// SET",
+													"// \t\"Name\" ='Angelia'",
+													"// where \"TrackId\"=36;",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Name\": \"Updated track name\",\n    \"AlbumId\": \"86690980\",\n    \"MediaTypeId\": \"12e232\",\n    \"GenreId\": \"97098\", \n    \"Composer\": \"Updated composer\",\n    \"Milliseconds\": 689,\n    \"Bytes\": \"24235\",\n    \"UnitPrice\": 13123\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/tracks/:id",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"tracks",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a track",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = {",
+													"    msg: \"Deleted track\",",
+													"}",
+													"",
+													"// status code = 201 ",
+													"",
+													"// Query -",
+													"// UPDATE ",
+													"// \t\"Track\"",
+													"// SET",
+													"// \t\"deleted_at\" ='true'",
+													"// where \"TrackId\"=36;",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/tracks/:id",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"tracks",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Update an album",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = {",
+											"    msg: \"Updated album successfully\",",
+											"    updatedAlbum: {",
+											"        \"AlbumId\": 1234,",
+											"        \"Title\": \"Test album\",",
+											"        \"ArtistId\": 12",
+											"    }",
+											"",
+											"}",
+											"",
+											"// status code = 200",
+											"",
+											"// Query -",
+											"// UPDATE ",
+											"// \t\"Album\"",
+											"// SET",
+											"// \t\"Name\" ='Test Album'",
+											"// where \"AlbumId\"=36;",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Title\": \"Test album\",\n    \"ArtistId\": 12\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/albums/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"albums",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create album",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const resposne = {",
+											"    msg: \"Album created\"",
+											"}",
+											"",
+											"// status code : 201",
+											"",
+											"// Query ",
+											"// INSERT into \"Album\" (\"Title\", \"ArtistId\")",
+											"// values (\"Album test title\", ArtistId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Title\": \"Test album\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/artists/:ArtistId/albums",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"artists",
+										":ArtistId",
+										"albums"
+									],
+									"variable": [
+										{
+											"key": "ArtistId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all albums",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const resposne = {",
+											"    msg: \"Fetched  Album\",",
+											"    playlist: [",
+											"        {",
+											"            \"AlbumId\": 11,",
+											"            \"Title\": \"Test Album title 1\",",
+											"            \"ArtistId\": 15",
+											"        },",
+											"        {",
+											"            \"AlbumId\": 12,",
+											"            \"Title\": \"Test Album title 2\",",
+											"            \"ArtistId\": 15",
+											"        }",
+											"    ]",
+											"}",
+											"",
+											"// status code : 200",
+											"",
+											"// Query - ",
+											"// select ",
+											"//  * ",
+											"// from ",
+											"//  \"Album\" join \"Artist\" on ",
+											"//  \"Album\".\"ArtistId\"=\"Artist\".\"ArtistId\"",
+											"// where ",
+											"//  \"Artist\".\"ArtistId\"=12;",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/artists/:ArtistId/albums",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"artists",
+										":ArtistId",
+										"albums"
+									],
+									"variable": [
+										{
+											"key": "ArtistId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete album",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = {",
+											"    msg: \"Deleted Album\",",
+											"}",
+											"",
+											"// status code = 201 ",
+											"",
+											"// Query -",
+											"// UPDATE ",
+											"// \t\"Album\"",
+											"// SET",
+											"// \t\"deleted_at\" ='true'",
+											"// where \"AlbumId\"=36;",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/albums/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"albums",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Artist created\"",
+									"}",
+									"",
+									"// status code : 201",
+									"",
+									"// Query ",
+									"// INSERT into \"Artist\" (\"Name\")",
+									"// values (\"Test artist\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Test artist\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/artists"
+					},
+					"response": []
+				},
+				{
+					"name": "Update artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Artist updated\"",
+									"}",
+									"",
+									"// status code : 204",
+									"",
+									"// Query ",
+									"// UPDATE \"Artist\" ",
+									"// set \"Name\"='Updated artist'",
+									"// where \"ArtistId\"=2;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Updated artist\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/artists/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"artists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one Artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Fetched artist data\",",
+									"    artist: {",
+									"        \"ArtistId\": 19,",
+									"        \"Name\": \"Test artist\"",
+									"    }",
+									"}",
+									"",
+									"// status code: 200 ",
+									"",
+									"//Query",
+									"// select",
+									"//     *",
+									"// from ",
+									"//     \"Artist\"",
+									"// where",
+									"//     \"ArtistId\" = 10;",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/artists/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"artists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all artists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Fetched all artist data\",",
+									"    artist: [",
+									"        {",
+									"            \"ArtistId\": 19,",
+									"            \"Name\": \"Test artist 1\"",
+									"        },",
+									"        {",
+									"            \"ArtistId\": 20,",
+									"            \"Name\": \"Test artist 2\"",
+									"        }",
+									"    ]",
+									"}",
+									"",
+									"// status code: 200 ",
+									"",
+									"//Query",
+									"// select",
+									"//     *",
+									"// from ",
+									"//     \"Artist\"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/artists"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Artist deleted\"",
+									"}",
+									"",
+									"// status code : 204",
+									"",
+									"// Query ",
+									"// UPDATE \"Artist\" ",
+									"// set \"deleted_at\"='true'",
+									"// where \"ArtistId\"=2;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/artists/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"artists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "Create Playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Artist created\"",
+									"}",
+									"",
+									"// status code : 201",
+									"",
+									"// Query ",
+									"// INSERT into \"Playlist\" ",
+									"// values (12, \"Test Playlist\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Test Playlist\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/playlists"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Fetched  Playlist\",",
+									"    playlist: {",
+									"        \"PlaylistId\": 10,",
+									"        \"Name\": \"Test Playlist\"",
+									"    }",
+									"}",
+									"",
+									"// status code : 200",
+									"",
+									"// Query - ",
+									"// select ",
+									"// *  ",
+									"// from ",
+									"//  \"Playlist\" ",
+									"// where ",
+									"// \"PlaylistId\" = 16;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/playlists/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"playlists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all playlists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Fetched all Playlists data\",",
+									"    playlists: [",
+									"        {",
+									"            \"PlaylistId\": 10,",
+									"            \"Name\": \"Test Playlist\"",
+									"        },",
+									"        {",
+									"            \"PlaylistId\": 10,",
+									"            \"Name\": \"Test Playlist\"",
+									"        },",
+									"    ]",
+									"}",
+									"",
+									"// status code : 200",
+									"",
+									"// Query - ",
+									"// select ",
+									"//  *  ",
+									"// from ",
+									"//  \"Playlist\";"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/playlists"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"updated Artist\",",
+									"    updatedArtist: {",
+									"        \"ArtistId\": 12,",
+									"        \"Name\": \"Updated artist\"",
+									"    }",
+									"}",
+									"",
+									"// status code : 200 ",
+									"",
+									"// Query ",
+									"// UPDATE \"Playlist\"",
+									"// SET \"Name\"='Updated Playlist'",
+									"// where \"PlaylistId\" = 12",
+									"// returning *;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Updated artist\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/playlists/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"playlists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Media type",
+			"item": [
+				{
+					"name": "Create Media type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Artist created\"",
+									"}",
+									"",
+									"// status code : 201",
+									"",
+									"// Query ",
+									"// INSERT into \"MediaType\" (\"Name\")",
+									"// values (\"Test mediatype\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Test media type\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/mediatypes"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all mediatypes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Fetched Mediatypes\",",
+									"    mediatypes: [",
+									"        {",
+									"            \"MediaTypeId\": 10,",
+									"            \"Name\": \"Test Playlist 1\"",
+									"        },",
+									"        {",
+									"            \"MediaTypeId\": 11,",
+									"            \"Name\": \"Test Playlist 2\"",
+									"        }",
+									"    ]",
+									"}",
+									"",
+									"// status code : 200",
+									"",
+									"// Query - ",
+									"// select ",
+									"// *  from ",
+									"// \"MediaTypes\" ",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/mediatypes"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Media type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"updated Mediatype\",",
+									"}",
+									"",
+									"// status code : 200 ",
+									"",
+									"// Query ",
+									"// UPDATE \"MediaType\"",
+									"// SET \"Name\"='Updated mediatype'",
+									"// where \"MediaTypeId\" = 12;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Updated media type\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/mediatypes/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"mediatypes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "Get all genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Fetched Genre\",",
+									"    genre: [",
+									"        {",
+									"            \"GenreId\": 10,",
+									"            \"Name\": \"Test Genre 1\"",
+									"        },",
+									"        {",
+									"            \"GenreId\": 12,",
+									"            \"Name\": \"Test Genre 2\"",
+									"        }",
+									"    ]",
+									"}",
+									"",
+									"// status code : 200",
+									"",
+									"// Query - ",
+									"// select ",
+									"// *  from ",
+									"// \"Genre\" ;",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/genres"
+					},
+					"response": []
+				},
+				{
+					"name": "Update genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"updated Genre\",",
+									"}",
+									"",
+									"// status code : 200 ",
+									"",
+									"// Query ",
+									"// UPDATE \"Genre\"",
+									"// SET \"Name\"='Updated genre'",
+									"// where \"GenreId\" = 12;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Updated genre\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/genres/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"genres",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resposne = {",
+									"    msg: \"Genre created\"",
+									"}",
+									"",
+									"// status code : 201",
+									"",
+									"// Query ",
+									"// INSERT into \"Genre\" (\"Name\")",
+									"// values (\"Test Genre\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Test Genre\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/genres"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000/chinook"
+		}
+	]
+}

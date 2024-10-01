@@ -1,0 +1,69 @@
+Basic sql query:
+1. Clause
+	- where
+	- group by, 
+	- distinct
+	- order by, limit, 
+	- offset: starting index of the records to be fetched
+	  offset and limit are used together for pagination
+
+2. Queries
+	- Select
+	- Update
+	- Delete
+	- Insert
+
+
+4. Aggregate functions: count, max, min, sum etc.
+5. What is docker?
+6. Table naming conventions: table name is always plural and snake_case is generally used for table names and column names
+7. comments: single line comment using --
+8. Execution order of a query
+	for example
+	select               p1
+		firstName		 
+	from 				 p0
+		users
+	where				 p2
+		city="Udaipur"
+	group by 			 p3
+		id
+	order by 			 p4
+		name
+	limit 10;			 p5
+
+9. Image- base OS
+10. Command to enter container: docker exec -it <container_name> bash
+11. To restore: psql -U <username> -d <db_name> < file_name
+12. In postbird single quotes are used for string and double quotes are used for column values.
+
+Tasks-
+Session 1: 
+	1. When do we use 'having' clause
+	2. DDL & DML
+	3. Restore the dump of the database in postbird via CLI
+
+Session 2:
+	1. calculte max(miliseconds), min(bytes) and sum(unit price) for the last three columns of track table
+	2. kBytes/sec: for miliseconds and bytes
+	3. For employee table get the count of employees of a city and sort. 
+	4. January to march 2009, count of invoice and sum of total of invoices.
+	5. When do we use having and where with group by?
+
+Read about: 
+1. draw.io
+2. SOLID principles
+3. Normalization
+4. Atomicity
+
+
+
+
+Inheritance
+Package manager - pg_trunk
+pg_crone
+caching
+publish subscribe model
+
+
+

@@ -1,0 +1,75 @@
+1.	The json data type stores an exact copy of the input text, 
+	which processing functions must reparse on each execution
+
+	jsonb data is stored in a decomposed binary format that makes it slightly slower to input due to added conversion overhead, but significantly faster to process, since no reparsing is needed. 	jsonb also supports indexing, which can be a significant advantage.
+
+2.	json type stores an exact copy of the input text, 
+	- it will preserve semantically-insignificant white space between tokens
+	- order of keys within JSON objects. 
+	- if a JSON object within the value contains the same key more than once, all the key/value pairs are kept. 
+	(The processing functions consider the last value as the operative one.)
+
+	jsonb does not preserve white space, 
+	does not preserve the order of object keys, 
+	and does not keep duplicate object keys. 
+	(If duplicate keys are specified in the input, only the last value is kept.)
+
+3. 	jsonb has a capability of testing containment(if right is subset of left side) and existence i.e the element on right is contained within the element at left
+	Syntax- select '"name"'::json @> '"name"'::jsonb;
+
+	syntax - json, json 
+		- primitive
+		- array
+		- object
+
+4. jsonb indexing
+5. jsonb subscripting
+
+
+Array 
+- unnest
+- subscript
+- cardinality
+
+aggregate function for arrays
+operators and functions to work with json and jsonb
+	json_build_object(): to create json object
+	array_agg(): to create an array of objects
+
+extensions in postgres
+e.g. uuid-osp
+To add extension: create extension <extension_name> 
+b-tree
+
+Indexes
+- regular index(with one column)
+- composite index(with more than one column)
+
+Constraints- set of rules
+- foreign key
+- required
+- unique
+- enum
+* best practice for a column with constaint enum is to make it required i.e not null with a default value defined
+* entry from a table cannot be deleted from a table if any of it's column 
+
+cascade 
+
+soft delete   - 
+We create a column that acts a flag value to indicate if entry is deleted or not
+ - deleted_at(deleted_at field is set to null if the entry is deleted)
+ - archieve(bool)
+* when we used a concept a soft copy, while selecting the data  the where clause is usd by default to check if value is not deleted as 'where deleted_at != true'
+
+
+variable in sql syntax :userid(this can be replaced at the value in where clause)
+
+* joins are optimised when working with index(i.e primary and foreign keys)
+
+* to return the updated row we use - update set name="pd" where id = 1 returning *
+
+Task -
+resources - artist, track , album, playlist,  media type, genre
+write endpoints, payload, resposne, status code, query, sample req, sample res
+
+

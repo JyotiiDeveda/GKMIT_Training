@@ -1,0 +1,176 @@
+Aggregation in MongoDB
+- uses step by step approach
+- output of one is input to other
+- In aggregate pipeline
+	$ is used for operator in key
+	$ works as a cursor in value 
+
+- Basic aggregation operators
+	sort, limit, skip, count
+
+- addFields operator adds fields within the document at runtime
+to access the field of an object within an array we use array.fieldOfObject
+
+
+
+
+Queries
+
+All the operators below, output is runtime they do not modify the actual database
+
+1. Add a field of average of rmdb.rating and tomatoes.view where rating is greater than 5
+db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} ]) 
+
+
+2. add a condition to filter out movies of year after 1910
+
+db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gt: 1910}}}])
+
+
+3. Count the fields
+db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gt: 1910}}}, {$count: "FieldCount" }])
+
+
+4. Sort
+
+
+5. limit
+
+
+6. skip
+
+db.movies.aggregate([ { $match: { 'year': { $lt: 1900} } }, { $sort: { 'imdb.rating': -1 } }, { $limit: 5 }])
+
+
+
+7. $unwind
+ * increases the run time memory usage 
+ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $unwind: "$genres" }, { $count: "FieldCnt"}])
+
+
+ 8. $project
+ - works like select {fieldname: 0, fieldname2: 1}
+ - alias { aliasname: "$fieldname" , fieldname: 0(otherwise we will have two fields with same values)}
+ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $unwind: "$genres" }, { $project: { "countriesAlias": "$countries"}}])
+
+
+
+9.  $group
+ - sql does not support grouping without a field but aggregation pipeline in mongodb does by passing null in _id field of $group
+  $push - to get all the values of a field of a group in an array
+  $first
+  $last
+  $count is initialiased as {} unlike $count in aggregation pipeline where value of $count is an alias
+
+ $group enhances the performance as it narrows down the number of fields
+
+ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $group: { _id: "$year", title: { $push: "$title"}} }])
+
+ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $group: { _id: "$year", title: { $push: "$title"}, count: {$count: {}} }}])
+
+
+
+ 10. $lookup 
+ - join in mongodb is called lookup
+ - mongo is not optimised for relationa; operations with more than one collection
+ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $lookup: { from: "comments",  foreignField: "movie_id", localField: "_id", as: "Comments"}} ])
+
+- lookup without any filtering of data is more slow
+db.movies.aggregate( [ { $lookup: { from: "comments",  foreignField: "movie_id", localField: "_id", as: "Comments"}} ])		
+
+- aggregate pipeline can be created within lookup
+{ $lookup : {
+	from: 
+	foreignField,
+	localField,
+	as: , 
+	pipeline: [
+		different stages can be created here
+	]
+}}
+
+- variables can be created using let in aggregation pipeline
+
+
+11. $facet
+ - facet has two fields each of which is an array 
+ - both the fields get same amount of data which is the output of previous stages of aggregation pipeline
+ - facet is used to execute both the fields parallely
+ - As field itself is an array it can have its own aggregation pipeline i.e number of stages
+
+
+	db.movies.aggregate( [
+			{ $match: { 'imdb.rating': { $gt: 5 } } },{ $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} } } , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year' }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])
+
+	db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year', totalCnt: { $count: {}} }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])	
+
+
+Pagination
+- Although an offset is defined the cursor still traverses from beginning
+
+Q - Implement pagination
+db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { data: [ { $skip: 5 }, { $limit: 10} ] ,  documentCnt:  [{ $count: "Cnt" }] } } ])
+
+
+$arrayEleAt - to 
+
+$out: saves the output of aggregation pipeline to a collection
+if it is used with a collection that already exists it will replace the entire collection
+
+Indexes
+ - ttl(time to leave) 
+   It is self destructive
+   Used when mongo is used as a chache
+ - text based index
+
+
+Mongoose is ORM
+
+
+
+Self study
+* Output of an aggregation pipeline(after execution of all stages) is an array
+
+1. $in
+	(aggregation)
+	-	$in aggregation operator does not support regex matching 
+
+	(Query operator)
+	- syntax: { field: { $in : [ array of elements ] } } 
+	- if field is an array then in operator matches for atleat one value of the field to be equal to specified array
+
+2. $all
+	- it is like $in but this ensures that the field contains all the elemets of the given array irespective of their order
+
+
+3. $count
+	- $count syntax in aggregation is same as that of count query operator 
+	- Syntax: { $count: 'aliaseColumnNameForCount'}
+	- in aggregation it returns a document that contains the count
+	- as a query operator it retuns an integer value
+	- $count has a different syntax for group in aggregation
+	- Syntax: {fieldname: { $count: {} } }
+
+
+4. Operators to work with arrays (in crud operations)
+		- $elemMatch- to filter out documents on the basis of conditions on array element
+			Syntax: { arrname: { $elemMatch: { $gte: 50, $lt: 80} } }
+		- elemMatch only matches for array elements specifically  and not for an object or its field
+
+		- accessing an element using index, filtering out fields with a condition on array element can be defined using 		indexing in queries
+		- indexing is not supported in aggregate but crud operations support array indexing
+ 		- e.g db.movies.find( { 'cast.1': 'John Ott' })
+
+
+
+Doubts:
+1. Do we use $ in the value in aggregation pipeline only
+2. How to get the value out of object which is in an array 
+3. what is $let
+4. How to access the output of aggregation operation
+
+
+
+
+
+

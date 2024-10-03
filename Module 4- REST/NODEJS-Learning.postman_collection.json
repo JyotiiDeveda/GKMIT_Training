@@ -1,0 +1,943 @@
+{
+	"info": {
+		"_postman_id": "65f9ff8b-d258-4a65-ba83-af8cce6ec750",
+		"name": "NODEJS-Learning",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38476514",
+		"_collection_link": "https://nodejs-team-8364.postman.co/workspace/Nodejs-Team-Workspace~f8b65aba-be17-4ce0-85ae-2974c60340f8/collection/38476514-65f9ff8b-d258-4a65-ba83-af8cce6ec750?action=share&source=collection_link&creator=38476514"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "POSTS",
+					"item": [
+						{
+							"name": "Get posts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users/:id/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										":id",
+										"posts"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a post",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"1224235\",\n    \"postTitle\": \"First post\",\n    \"postContent\": \"Here is the content of my first post\"\n}"
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/:id/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										":id",
+										"posts"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a post",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"1224235\",\n    \"postTitle\": \"New title\",\n    \"postContent\": \"update post content\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"{{$randomFirstName}}\",\n    \"email\" : \"{{$randomEmail}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/45356567",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"45356567"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"test-user\",\n    \"email\" : \"test@gmail.com\",\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"new-username\",\n    \"email\": \"test@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user fields",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"new-username\",\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/0987709",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"0987709"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "States",
+					"item": [
+						{
+							"name": "Cities",
+							"item": [
+								{
+									"name": "Get all cities of a state",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/states/:id/cities",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"states",
+												":id",
+												"cities"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add a city to state",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": {{$randomCity}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/states/:id/cities",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"states",
+												":id",
+												"cities"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a city",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": {{$randomCity}},\n    \"division\": \"random-division\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/cities/:id",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"cities",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update a city",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": {{$randomCity}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/cities/:id",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"cities",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Add state in the country",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"Madhya Pradesh\",\n    \"capital\" : \"Bhopal\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/countries/states",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"countries",
+										"states"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all the states of a country",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"Madhya Pradesh\",\n    \"capital\" : \"Bhopal\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/countries/:id/states",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"countries",
+										":id",
+										"states"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update state",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"Updated state\",\n    \"capital\" : \"updated capital\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/states/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"states",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete state",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/states/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"states",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add country",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": {{$randomCountry}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/countries",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/countries",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a country",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomCountry}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/countries/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a country record",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/countries/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JSON Placeholder",
+			"item": [
+				{
+					"name": "Get user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function setUsernameToEnv() {",
+									"    const res = pm.response.json();",
+									"    console.log(\"FirstName: \", res.firstname);",
+									"    pm.environment.set(\"username\", res.firstname.concat(' ', res.lastname));",
+									"    // pm.globals.set(\"globaluser\", res.firstname.concat(' ', res.lastname));",
+									"    // pm.collectionVariables.set(\"colluser\", res.firstname.concat(' ', res.lastname));",
+									"    console.log(pm.environment.get(\"username\"));",
+									"",
+									"}",
+									"",
+									"//the first parameter to the test function is the string to be logged if test passes",
+									"pm.test('Success', setUsernameToEnv());",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/users/10",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"10"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 24 Sep 2024 08:05:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=3Dsow7dQYkMWMtIcIw0rJlxJkJUsCFzgg%2FnhcR0nsYeg9o0zMo2IjYPwlDCy3BLrDePl42jY7gM5%2FjEnnMxm2mzzlVCehF%2Bxv1a6IUwhotr9eQYj%2BZ8GbjYDxV9Af62J7dVjBfyn\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8c8145066c2b3ca5-CDG"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 10,\n    \"firstname\": \"Jessica\",\n    \"lastname\": \"Perez\",\n    \"email\": \"jessicaperez@example.com\",\n    \"birthDate\": \"1988-11-13\",\n    \"login\": {\n        \"uuid\": \"10aeed11-9430-4d68-901f-c0d4c1c3bf13\",\n        \"username\": \"jessicaperez\",\n        \"password\": \"jsonplaceholder.org\",\n        \"md5\": \"c1328472c5794a25723600f71c1b4586\",\n        \"sha1\": \"35544a31cc19bd6520af116554873167117f4d94\",\n        \"registered\": \"2023-01-09T09:01:33.330Z\"\n    },\n    \"address\": {\n        \"street\": \"789 Oak Street\",\n        \"suite\": \"Suite 300\",\n        \"city\": \"Anytown\",\n        \"zipcode\": \"12345-6789\",\n        \"geo\": {\n            \"lat\": \"42.9012\",\n            \"lng\": \"-71.5678\"\n        }\n    },\n    \"phone\": \"(555) 555-9012\",\n    \"website\": \"www.jessicaperez.com\",\n    \"company\": {\n        \"name\": \"UVW Corporation\",\n        \"catchPhrase\": \"Innovative solutions for a better world\",\n        \"bs\": \"Technology\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get user Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function setUsernameToEnv() {",
+									"    const res = pm.response.json();",
+									"    console.log(\"Name: \", res.username);",
+									"    pm.environment.set(\"username\", res.username);",
+									"    pm.globals.set(\"globaluser\", res.name);",
+									"    pm.collectionVariables.set(\"colluser\", res.username);",
+									"    console.log(pm.environment.get(\"username\"));",
+									"",
+									"}",
+									"",
+									"//the first parameter to the test function is the string to be logged if test passes",
+									"pm.test('Success', setUsernameToEnv());",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/users/10",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"10"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 24 Sep 2024 08:05:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=3Dsow7dQYkMWMtIcIw0rJlxJkJUsCFzgg%2FnhcR0nsYeg9o0zMo2IjYPwlDCy3BLrDePl42jY7gM5%2FjEnnMxm2mzzlVCehF%2Bxv1a6IUwhotr9eQYj%2BZ8GbjYDxV9Af62J7dVjBfyn\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8c8145066c2b3ca5-CDG"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 10,\n    \"firstname\": \"Jessica\",\n    \"lastname\": \"Perez\",\n    \"email\": \"jessicaperez@example.com\",\n    \"birthDate\": \"1988-11-13\",\n    \"login\": {\n        \"uuid\": \"10aeed11-9430-4d68-901f-c0d4c1c3bf13\",\n        \"username\": \"jessicaperez\",\n        \"password\": \"jsonplaceholder.org\",\n        \"md5\": \"c1328472c5794a25723600f71c1b4586\",\n        \"sha1\": \"35544a31cc19bd6520af116554873167117f4d94\",\n        \"registered\": \"2023-01-09T09:01:33.330Z\"\n    },\n    \"address\": {\n        \"street\": \"789 Oak Street\",\n        \"suite\": \"Suite 300\",\n        \"city\": \"Anytown\",\n        \"zipcode\": \"12345-6789\",\n        \"geo\": {\n            \"lat\": \"42.9012\",\n            \"lng\": \"-71.5678\"\n        }\n    },\n    \"phone\": \"(555) 555-9012\",\n    \"website\": \"www.jessicaperez.com\",\n    \"company\": {\n        \"name\": \"UVW Corporation\",\n        \"catchPhrase\": \"Innovative solutions for a better world\",\n        \"bs\": \"Technology\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000/app",
+			"type": "string"
+		},
+		{
+			"key": "colluser",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,20 @@
+What is Rest?
+hy to use?
+CRUD Operations
+
+
+Types of http method: 
+GET
+POST
+PUT
+PATCH
+DELETE
+
+
+Difference between PUT and PATCH ?
+How to make HTTP endpoints and their naming conventions?
+When to use different type of HTTP Methods?
+Creation of User Routes (End Points)
+Params and Query parameters in endpoint url
+
+

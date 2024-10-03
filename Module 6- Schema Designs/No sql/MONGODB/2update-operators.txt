@@ -1,0 +1,171 @@
+CRUD Opearions
+
+1. Create
+	db.users.insertOne({})
+
+2. Read
+	db.users.find( { name: { $exists: false } } )
+	db.users.find( { _id: "66fa78ba8c73ccd33d964033" } )
+
+3. Update
+	db.users.updateMany( { name: { $exists: true } }, { $set: { hasName: true } } );
+
+
+
+---- Update operators -------
+
+	1. $set
+		- replaces the value of a field if it exists
+		- add a field if it does not exist
+		- it can also set fields in embedded documents
+		db.users.update( 
+		... { _id: ObjectId("66fa78ba8c73ccd33d964033") },
+		... { $set: { name: "Jyoti"} }
+		)
+
+		db.users.findOneAndUpdate( 
+			{ _id: ObjectId("66fa78ba8c73ccd33d964033") } , 
+			{ $set: { hobbies: "Journaling"} }
+		)
+
+		db.users.findOneAndUpdate( 
+			{ _id: ObjectId("66fa78ba8c73ccd33d964033") } , 
+			{ $set: { hobbies: [ "Journaling" ]} }
+		)
+
+		db.users.updateOne( 
+			{ name: "Jyoti" } , 
+			{ $set : { phone: [12345, 57799, 89008] } }
+		)
+
+
+
+
+	2. $push
+		db.users.findOneAndUpdate( 
+			{ _id: ObjectId("66fa78ba8c73ccd33d964033") },
+			{ $push : { hobbies: "Drawing" } }
+		)
+
+
+	
+	5. $unset 
+		- removes the field from the document
+	      db.users.updateOne( { name: "Jyoti" } , { $unset : { phone: "" } })
+
+	    - $unset when the positional $ operator does not remove the matching element from the array but rather sets it to null.
+	    - $ acts as a placeholder for the first array element that matches the condition 
+	    	db.users.findOneAndUpdate( { progress: 'push' }, { $unset:  { "progress.$": ""}} ) 
+
+
+	6. $pop - removes the first or last element of an array
+		- Syntax: { $pop: { fieldname: -1 } }
+		- to remove last element: 1
+		- to remove first element: -1
+
+
+
+	7. $pull - removes all elemets from an array that matches the condition
+		db.users.updateOne( { _id: ObjectId("66fa89f78c73ccd33d964034") }, { $pull : { progress: "unset" } })
+
+	7. each is used to add or remove multiple elements from an array
+		db.users.updateOne( { _id: ObjectId("66fa89f78c73ccd33d964034") }, { $push : { progress: { $each: ["unset", "exists" ] } } } )
+
+	8. $in (increment)
+		db.users.updateOne( { name: "Test user" }, { $inc : { score: 3 } } )
+
+*regex
+db.movies.find( { fullplot: { $regex: { $option: "i", value: "Africa" } } }, { title: true, fullplot: true } )
+
+doubt
+ db.users.find( { 'report.score': { $regex: /^ n . */ix } } )
+ db.users.find( { 'report.score': { $regex: /^ n . */, $options: 'ix' } } )
+
+db.users.find( { 'report.score': { $regex: /^ n . */xi } } )
+
+
+* min max	
+db.users.findOneAndUpdate( { name: "Jyoti" }, { $min: { score: 2 } } )
+
+db.users.findOneAndUpdate( { name: "Jyoti" }, { $max: { score: 10 } } )
+
+* and
+db.movies.find( { $and: [ { year: { $lt: 2014} }, { year: { $gt: 2007 } } ] } ).count();
+
+* and or
+db.movies.find( { $and: [ { year: { $eq: 2015 } }, { $or: [ { type: "tvseries" }, { genres: { $in: ["Drama"] } } ] } ] }, { type: true, genres: true} ).limit(5)
+
+
+* skip, limit and sort -> sort, limit, skip 
+db.users.find( {}, { name: true, email: true } ).skip(100).sort( { name: 1 } ).limit(5);
+db.users.find( {}, { name: true, email: true } ).skip(100).limit(5).sort( { name: 1 } );
+
+db.users.find( { hasName: true } ).count()
+
+
+db.users.updateOne({ name: "Test user" }, { $pop: { progress: -1 } } )
+
+
+---- Remaining update operators -----
+
+	1. $mul 
+		- upate query: { $mul: { field: number to multiply to field}}
+		- if a field passed to the $mul does not exists it creates the field set it to 0 and then multiply with given number
+
+	2. $rename - to rename a field name in the document
+		- update query: { $rename: { oldFieldname1: newFieldname1 , oldFieldname2: newFieldname2 } }
+
+	$ (positional operator)
+	- used to update an array element using a condition without knowing the indes
+	- filter query { arrayName: value }, 
+	  unpdate query{ "arrayName.$": newValue }
+	- $ cannot be used to update if filter query is based on negation , but works with $elemMatch
+
+
+	$[] (positional all)- updates all the elements of the specified array field for each document
+	- if an upsert update operation results in an insert the filter query in update should exactly match the array to use $[] operator
+
+
+	$[<identifier>] filtered positional operator
+	- update all the documents that matches the condition within arrayFilters option
+
+
+	$addToSet - adds an element to the array if it does not already exists
+	- if the element to be appended to the array is an array it appends the whole array as an element
+	- can be used with $each opearator { $addToSet: { fieldname: { $each: [val2, val2 ]} } }
+
+
+
+
+$exists
+
+$count
+
+
+---- * -----
+* upsert is an option for update operation, upsert: true
+	- either updates the document
+	- and if it does not exist, creates a new document and insert
+	 e.g: db.users.updateOne( { name: "Upsert user" }, { $set: { description : "Upsert is an option for update operation"}}, { upsert: true } )
+
+
+
+
+
+
+$[<identifier>] filtered positional operator
+- update all the documents that matches the condition within arrayFilters option
+
+
+
+
+
+
+
+
+
+
+
+
+
+

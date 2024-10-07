@@ -1,0 +1,82 @@
+Coding-standards - 
+
+1. Commenting and documentation
+2. Consistent Indentation 
+	- e.g we write a format for indentation in package.json 
+
+3. Avoid obvious comments
+4. Code grouping
+ 
+ * Importing a module within the required block
+ 	- Reduces unnecessary memory usage
+ 	- Enhances code grouping 
+
+5. Types of casing
+
+6. 
+
+7. Avoid deep nesting
+
+8. 
+
+
+Folder Structure
+Folder structure
+
+	1.      
+
+	Controllers
+
+	Middlewares
+
+	Services
+
+	Helper function - 
+		The function which is used frequently within a service to avoid cyclic dependency which can arouse on using a service wthin another service.
+
+	Util functions
+		- Any function for third party service 
+		- Any function which is common to several other services
+
+
+
+	
+
+Migrations is a CLI tool to 
+
+
+task -
+1. Read about eslint, prettier, ecmascript
+2. Explore swagger
+3. Package.json vs packagelock.json
+4. Sequalize ORM - An ORM for SQL related dbs.
+
+
+
+task2 - 
+1. Deep dive in sql vs nosql
+2. Types of databases in redis
+3. Deisgn Principles
+4. SOLID Principles
+5. Indexing in dbms
+
+Read -
+Migration
+Sequalize
+Crone jobs execute 
+.yaml file
+swagger
+serializer - process of converting a data format like object to array to any desirable format
+zod gui
+nest
+b-tree
+
+
+
+
+
+
+
+
+
+

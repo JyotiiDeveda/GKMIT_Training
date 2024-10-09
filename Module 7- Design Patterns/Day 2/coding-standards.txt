@@ -1,48 +1,100 @@
 Coding-standards - 
 
-1. Commenting and documentation
-2. Consistent Indentation 
-	- e.g we write a format for indentation in package.json 
+	1. Commenting and documentation
+	2. Consistent Indentation 
+		- e.g we write a format for indentation in package.json 
 
-3. Avoid obvious comments
-4. Code grouping
- 
- * Importing a module within the required block
- 	- Reduces unnecessary memory usage
- 	- Enhances code grouping 
+	3. Avoid obvious comments
+	4. Code grouping
+	 
+	 * Importing a module within the required block
+	 	- Reduces unnecessary memory usage
+	 	- Enhances code grouping 
 
-5. Types of casing
+	 * Types of casing
 
-6. 
+	5. Consistent naming scheme
 
-7. Avoid deep nesting
-
-8. 
+	6. DRY(Don’t repeat yourself) Principle
 
 
-Folder Structure
-Folder structure
+	7. Avoid deep nesting
 
-	1.      
+	8. File and folder Organization
 
-	Controllers
+	9. Consistent Temporary names
 
-	Middlewares
+	10. Capitalize SQL special words
 
-	Services
+	11. Separation of code and data
 
-	Helper function - 
+	12. Use meaningful names for variables and functions
+
+	13. Avoid using magic numbers
+
+	14. Code refactoring
+
+
+
+
+Folder structure 
+
+	1. husky --> run before pushing
+	2. config
+	3. constants
+	4. consumers    
+
+	5. Controllers
+
+	6. Middlewares
+
+
+	7. Helper function - 
 		The function which is used frequently within a service to avoid cyclic dependency which can arouse on using a service wthin another service.
+		It includes the business logic only.
 
-	Util functions
-		- Any function for third party service 
-		- Any function which is common to several other services
+	8. middlewares
+
+	9. models
+
+	10. routes
+
+	11. migrations
+
+	12. serializers --> used to transoform data according to specified response ex- change casing (snake case to pascel etc...)
+		* Serialization: Serialization is the process of converting a data structure, such as JavaScript object or array, 
+			into a format that can be easily stored.
+
+		* Deserialization: is the opposite process of Serialization. It converts data in its serialized format into its original data structure
+
+
+	13. services - main logic -> services can call other services however helpers can not call services.
+
+	14. sheets --> data and excel sheets
+
+	15. swagger - create api docs
+
+
+	16. templates --> ejs templates
+
+	17. tests --> contains test
+
+	18. utils - used to write third party code.
+		* Any function for third party service 
+		* Any function which is common to several other services
+
+	19. validators
+
+	20.	schedulers --> contains files to perform cron jobs
+
+		
 
 
 
 	
 
-Migrations is a CLI tool to 
+* Migrations is a CLI tool to 
+
 
 
 task -
@@ -60,6 +112,7 @@ task2 -
 4. SOLID Principles
 5. Indexing in dbms
 
+
 Read -
 Migration
 Sequalize
@@ -70,6 +123,30 @@ serializer - process of converting a data format like object to array to any des
 zod gui
 nest
 b-tree
+
+
+Swagger is more focused on collaborative API design and documentation 
+Swagger does not provide automation for testin we use plugins to write test cases. 
+Eslint acts as bug catcher and prttier acts as a formatter. 
+
+
+
+* Why do we need to write migration when we have models?
+	- Migration files are one time executable files.
+	- We need not to write migration files if auto-sync flag is passed true with models but that is inefficient, 
+	  the most efficient way is to use migration files.
+	- Using migration over auto-sync provides options for customization
+	- The executed migration files are saved within sequalizemeta  
+	- To append a table structure using migration
+		~ when it does not have any data we can drop the table by migration down and then re create the table by using migration up.
+		~ when it has data we create a new migration file for the new field.
+
+
+
+
+
+
+Postman has a builtin API monitoring system 
 
 
 

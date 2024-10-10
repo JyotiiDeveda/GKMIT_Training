@@ -19,6 +19,24 @@
 -- 	e.g
 -- 	select * from PlaylistTrack as PT where TrackId in (select TRackId from "Track");
 
+-- Task to do:
+-- 	Read about the following topics and prepare to present
+-- 	- Transactions
+-- 	- Views
+-- 	- Materialized views
+-- 	- Case
+-- 	- Array and JSON and JSONB
+
+
+-- session and connection, a connection can have multiple sessions, a session for each user, and session is terminated once
+-- Partial commit - 
+-- Transaction
+-- Views
+-- Materialized views: when data does not update frequently 
+-- hooks
+-- sql-practice.com to practice
+
+
 
 -- 1. Write a query to get playlist name and track name
 	select 

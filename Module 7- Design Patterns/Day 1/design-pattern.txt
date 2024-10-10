@@ -26,11 +26,11 @@
 	- Liskov Substitution Principle
 		the function of a subclass should behave as the parent class. The behaviour within any other object should not be violated.
 
-
-Web socket
-Proxy server
-Squash merge
-different stages - prod staging dev
+Self reading needed - 
+	Web socket
+	Proxy server
+	Squash merge
+	different stages - prod staging dev
 
 
 

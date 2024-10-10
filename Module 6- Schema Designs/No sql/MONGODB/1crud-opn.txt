@@ -1,0 +1,83 @@
+No sql ->
+CouchDB
+Cassandra
+Dynamo
+MongoDb
+
+Collection -> table
+Document -> row
+
+1. MongoDb is non-relational i.e not optimied for relational operations
+2. Relational Efficiency - sql > mysql > native code (the code that mimicks the functionality of db operations)
+
+What is NO SQL?
+	sql uses - 
+	1. Query engine (checks syntax, query validation)
+			|
+	2. sql processor/main_lib
+			|
+	3. Schema full 
+	* couchDB, Cassandra uses sql like engine
+
+	No sql -
+	has no query engine i.e it is schema less but some no sql db like couchdb and cassandra uses sql query engine.
+
+* Mongo is the most powerful no sql database 
+
+Why NoSQL?
+1. MongoDB provides ease of access whereas sql needs plan of action
+2. Old datatypes with least approach in sql where no sql has 7 to 8 data types and suppports array and json which makes it most powerful.
+3. Single table operation are less efficient in sql as compared to single collection operation in mongoDB, mongo is comparatively very fast with single collection.
+
+
+
+* Root level document is the document  tored 
+* If there is one on one realtion bw two entities it can be created as a nested field within the main document without creating a different object
+* for a one to many relation, the field can be nested within the main document ifsub field has a fixed length otherwise use different collection
+* Many-to-many relation is avoided in mongo 
+* operations on many to many relation using junction table are inefficient in mongodb unlike sql therefore we use pivot table that includes some frequently used table of main table increasing redundancy.
+
+Mongo CRUD 
+	Syntax - db.collection.method()
+	1. find
+	2. findOne
+	3. insertOne
+	4. insertMany
+	5. update
+	6. remove
+
+	* Mongoose provide an ORM layer for purposes like 
+
+Operators
+	1. find operators
+	* While updating a field of an object in an array of objects we use $set 
+	2. update operators ($push takes duplicate values, $addtoset does not)
+
+
+skip, limit, count, order
+
+Task- 
+1. create an array of object remove middle element using pull
+2. Use all update operators on m_flix
+3. Limit, sort, skip 
+4. Use $and $or in one query
+5. use $regex to filter out fullplot with skip and limit
+
+
+Sesssion 2
+Transactions in mongodb need replica
+Scaling- horizontal, vertical
+Sharding
+Replica is different from Sharding
+
+
+
+Read:
+options in regex
+
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+Redis
+1. cache find mechanism in redis has O(1) complexity as it uses hash map
+2. It stores string and boolean values
+3. different ways to save data in redis - set, hash, map
+	- data is stored as key value pairs in hash
+4. Data is stored in memory that is in ram
+5. Redis does not have database name it works with indexes like first db in redis is [0], then [1] and so on.
+
+Key naming convention 
+	Syntax: "<resourcename>:<variable>"
+	system variable - "system:maxLimit"
+
+	e.g
+	"user_id:account:explore": "[{     }]"
+	"user_id:account:profile" "[    ]"
+	"user_id:account:view_stories": "[ ]"
+	: is the delimeter
+
+redis provides modules	
+
+
+To access data
+1. 	Read from cache <-> read from DB
+	* this is generally used
+	- when data is requested first check in cache
+	- if not present chcek in DB access it
+	- save it to cache  
+	- access from cache in later calls
+
+
+2. Read from DB <-> rad from cache
+	* this approach is used by developers to execute script once
+
+
+
+To write data
+1. Write in cache -> write in DB
+	- used when number of post request is very large
+	- when saving data from cache to db, queue mechanism is used where data is saved in batches(each queue index has a batch of data) from cache to database in 
+
+
+2. Write in DB -> write in cache
+
+
+* TTL can be set dynamically for different caches
+
+
+Doubts -
+how does transaction affect performance?
+
+
+Case study
+what is Instagrams Justin beiber problem and how facebook prevented it from Ronaldo problem.
+
+
+Tasks-
+1. Create leaderboard using redis
+2. Consider nearby geolocation and find the shortest distance locations
+
+
+
+
+mode apps
+schema as a db
+
+

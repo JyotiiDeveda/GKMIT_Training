@@ -1,0 +1,41 @@
+1. What are design patterns?
+2. Why do we need them?
+3. Types of Design patterns
+	- Singleton method
+		A class can have only one object
+
+	- Factory method
+
+	- Observer Pattern 
+
+	- Decorator Pattern
+		To further process the output of a function we create an another function which acts as a decorator. 	
+
+	- Proxy Pattern
+		Placeholder for another object to control access to it.
+
+	- Command Patterns
+
+
+4. SOLID Principles
+	- Single Responsibility Principle
+
+	- Open closed Principle 
+		Open to extension and close to modifications
+
+	- Liskov Substitution Principle
+		the function of a subclass should behave as the parent class. The behaviour within any other object should not be violated.
+
+
+Web socket
+Proxy server
+Squash merge
+different stages - prod staging dev
+
+
+
+Task- 
+1. Read about - Interface segregation , dependency inversion
+2. Write an example of bad code and good code for design patterns and each  solid principle
+
+

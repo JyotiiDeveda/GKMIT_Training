@@ -1,0 +1,144 @@
+Pre-requisites for setup of a nodejs project
+1. node LTS version - npm init
+2. npm LTS version
+3. Server using express
+4. Initialze git repo
+5. Add .gitignore
+6. .env- environment variables 
+   .env.sample- as an example for .env
+7. Linter(eslint), formatter(prettier)
+	- .prettierrc, eslint.js are config files and are pushed to remote
+8. Add readme 
+9. Initial commit
+10. Folders
+	- Routes
+	- controllers
+	- services
+	- helpers
+	- models
+	- middlewares
+	- config
+	- tests
+	- swagger
+	- validators
+	- utils
+	- serialization
+
+	* tests folder is created out of src when a build of tests is created in production
+	* It can be within src as well
+	* Routes folder can only import controllers validators and middlewares, services are never imported in routes
+
+An empty folder is not tracked by git so for a folder to be pushed to git a file .gitkeep can be created within every folder
+Make second commit and push to git
+
+
+npx - 
+npm options: --save, -g
+
+Use best practice
+	1. Do not install packages directly using npm i
+	2. Use prettier and eslint in project
+	3  nodemon
+	4. eslint
+	5. prettier
+	6. ORM - sequalize, mongoose
+
+
+Types of branches
+	- prod: Current working version of the code
+	- release: Created from Prod to add a new release(i.e group of features of any changes)
+		release version 0.0.0 -> major-changes..minor-changes
+	- feature: When adding a feature
+	- docs: for documentation
+	- hotfix: 
+	- chore: when functionality has not been updated but made comments or formatting etc.
+	prod -> release -> fetures -> release -> prod
+	  |
+	 hotfix
+
+	* hotfix is a branch to resolve an urgent bug in prod
+	* bugfix braches are created to resolve bugs in features
+
+
+Route endpoints
+	Always use resource name in routes if data is from one table only
+	Custom route names can be used for composite data and generally used for get calls
+
+
+File naming
+* File names are written in kabab-case
+1. Routes folder have an index.js that combines all the routes from route files for different resources
+	- index.js
+	- resources.route.js
+
+	Usecases of index.js within a folder
+	- acts as a module(e.g in routes)
+	- Common and frequently used functions are included in 
+
+2. Files in controller
+	- resources.controller.js
+
+3. Validators
+	- file name: resources.validator.js
+	- Library - joi, yue
+	- validations are done here
+	- A Validator is written for resource
+
+4. Services
+	- file name: resources.service.js
+
+5. Helpers
+	- file name: 
+		resources.helper.js - 
+		common.helper.js - helper functions are used commonly for multiple resources
+
+6. Utils
+	- file name: service.js (e.g aws.js)
+
+7. config
+	- file name: 
+		database.js (config file for any database)
+		redis.js
+
+
+8. Middleware
+	- file name: auth.middleware.js
+
+9. Serializers
+	- file name: resources.serializer.js
+	- Serialization is to serialize a data of one form to another (e.g standardizing the keys of object each controllers returns before sending it to frontend)
+
+
+Table name
+	- snake_case
+	- Plural
+	- 
+
+Model name
+	- PascalCase
+	- Singular
+
+* Sequalize does opposite of cases for models and table
+* In sequalize the generated migration files names are creating using timestamp to maintain execution order and keep them unique
+
+Seeders(in sequalize)
+	- To populate tables with data
+	- Used when data can be stored all at once and are not manipulated.
+	- Executes only once
+
+
+function names - camel case
+
+
+
+
+Task - 
+Add prettier and eslint in calculator app
+
+Read - 
+Migration
+npm package to send status code
+
+
+
+

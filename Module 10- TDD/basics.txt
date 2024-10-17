@@ -1,0 +1,63 @@
+TDD - Test Driven Deployment/ Technical design Document
+
+
+1. PRD (Product requirement Document) - We define what things are in scope and what are out of scope
+1. purpose 
+2. scope
+3. workflow
+4. Components
+	
+5. Service components 
+	API layer
+	Service layer
+	Database
+	Error handling
+
+
+6. Handling edge cases
+7. Performance Consideration
+8. Security Consideration
+9. Testing Plan
+
+Test driven Development
+1. Write test cases to fail the code
+2. Write code to pass test cases
+3. Refactor code ssuch that test cases pass still. 
+
+We dont write test cases
+ 1. Tighter deadline
+ 2. Uncertain requirement
+ 3. High dependency on third party 
+
+
+Task - 
+Write TDD 
+Create a basic calculator and write TTD
+ 	- Get two input values
+ 	- Write endpoints for - add, subtract, multiply, divide, percentage
+ 	- Maintain history
+
+
+
+Read - 
+SQL Injuction
+Stubbing
+Mocking
+
+Mistakes
+1. Make one endpoint for all four operations by passing 
+2. Pass email in headers
+3. 
+
+
+
+
+
+
+
+
+
+
+
+
+

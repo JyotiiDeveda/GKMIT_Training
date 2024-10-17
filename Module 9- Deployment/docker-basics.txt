@@ -1,0 +1,323 @@
+1. What is docker?
+	- It helps creating isolated environments within the system
+	- Is useful for environment set up
+
+2. Docker is written in GO language and is therefore fast.
+
+3. Docker architecture
+	- It works on a client server architecture
+	- Docker CLI acts as a client
+	- Docker daemon acts as a server which executes the commands
+	- The commands from CLI and output from docker daemon transfers through rest.
+
+
+
+4. Container VS Virtual Machine
+	- Container is light weight where as VM has its own OS and it uses hypervisor therefore heavy
+
+
+5. What is DockerFile?
+	- used to containerize an application.
+	- It is a portable file that helps sharing an application. along with its environment.
+
+6. Docker compose
+	- to run multiple containers
+
+Docker compose file vs dockerfile
+
+6. Docker container vs docker image
+	Container - Running instance of an application
+	Image - A template of an application
+
+7. ENTRYPOINT vs CMD in dockerfile
+	- CMD can be overridden by passing as an argument in cli but entrypoint cannot be overridden
+	CMD. Sets default parameters that can be overridden from the Docker Command Line Interface (CLI) when a container is running.
+	ENTRYPOINT. Default parameters that cannot be overridden when Docker Containers run with CLI parameters.
+
+
+
+Docker container Commands
+	1. docker run <image_name>
+		 - Create a container using the image if it exists
+		 - Pulls the image from hub.docker.com and then creates a container if image does not exists
+		 * 	docker run -it <image_name>
+		 	- Runs container in interactive mode i.e opens docker container cli
+
+		 * docker run -d <image_name>
+		 	- runs image in detached mode
+
+
+	3. docker exec <container> <cmd>
+		- Execute the docker command from system terminal and returns the output to the system terminal only
+
+		* docker exec -it <container> bash
+
+	5. docker <container> start
+
+	6. docker <container> stop
+
+	7. docker ps 
+		- listing all the running containers
+
+	8. docker container ls
+		* docker container ls -a
+
+	9. docker run -it -p 3000:3000 <container/image>
+		- to start a container with port mapping
+
+	10. docker container attach	Attach local standard input, output, and error streams to a running container
+	docker container commit	
+		-	Create a new image from a container's changes
+	
+	docker container cp	
+		- Copy files/folders between a container and the local filesystem
+
+	docker container create	
+		- Create a new container
+
+	docker container diff	
+		- Inspect changes to files or directories on a container's filesystem
+	docker container export	
+		- Export a container's filesystem as a tar archive
+
+
+	docker container inspect	
+		- Display detailed information on one or more containers
+
+	docker container kill	
+		- Kill one or more running containers
+
+	docker container logs	
+		- Fetch the logs of a container
+
+	docker container pause	
+		- Pause all processes within one or more containers
+
+	docker container port	
+		- List port mappings or a specific mapping for the container
+
+	docker container prune	
+		- Remove all stopped containers
+
+	docker container rename	
+		- Rename a container
+
+	docker container restart	
+		- Restart one or more containers
+
+	docker container rm	
+		- Remove one or more containers
+
+	docker container start	
+		- Start one or more stopped containers
+
+	docker container stats	
+		- Display a live stream of container(s) resource usage statistics
+
+	docker container stop	
+		- Stop one or more running containers
+
+	docker container top	
+		- Display the running processes of a container
+
+	docker container unpause
+		- Unpause all processes within one or more containers
+	docker container update	
+		- Update configuration of one or more containers
+
+	docker container wait	
+		- Block until one or more containers stop, then print their exit codes
+
+	docker container exec	
+		- Execute a command in a running container
+
+
+
+
+
+Image commands
+	1. docker image ls, docker images
+
+	2. docker image rm <image_name> or docker rmi <img_id/img_name>
+
+	3. docker image save <image_name>
+
+	4. docker image push <image_hash/name>
+
+	5. docker image inspect
+
+	6. docker image prune -a
+		- Removes all unused images and list the images deleted and memory freed.
+
+	7. docker pull <image_name>
+
+	8. docker  <image>
+
+
+Docker Network
+
+	1. Bridge network:	
+		- The default network driver.
+		- The host machine is connected to some internet, so docker creates a bridge network with the host and get connected with the internet therefore every container created without specifying network is connected to the internet via bridge network by default.
+		- One container can ping another within the default bridge network using IP address.
+
+	 	# Creating a network- docker network create <network_name>
+
+		# Create a container with a network specified
+		docker run -it --network <network_name> --name <container_name> <image_name>
+
+		* to get the ip address inside a docker container:  hostname -I
+
+		# to connect a container to a network - docker network connect <network_name> <container_name>
+
+		two containers conected to the same user defined network can ping each other using name as well.
+
+
+	2. Host netwok
+		Remove network isolation between the container and the Docker host.
+	3. None	
+		Completely isolate a container from the host and other containers.
+	4. Overlay
+		Overlay networks connect multiple Docker daemons together.
+	5. Ipvlan
+		IPvlan networks provide full control over both IPv4 and IPv6 addressing.
+	6. Macvlan
+		Assign a MAC address to a container.
+
+
+
+------- Network Commands --------
+
+	1. docker network create -d bridge my-net
+
+	2. docker network rm my-net 
+
+	3. docker create --name <container_alias> --network <network_name> --publish 8080:80 <image>
+		- Creating a new container and add it to the network 
+
+	4. docker network connect <network_name> <container_name>
+		- To connect a running container to a network
+
+
+Docker compose
+	1. docker compose up 
+		- to run all containers at once
+
+	2. docker compose down 
+		- to stop and remove all the containers
+
+	3. docker compose stop <service_name>
+
+	4. docker compose restart <service_name>
+		- to restart a stopped service
+
+	5. docker compose rm <service_name>
+		- to remove a stopped service
+
+	6. docker compose down
+		- to stop all services
+
+	7. docker compose build
+		- to reduild  all services
+
+	8. docker compose exec -it <service_name> <command>
+		- running docker compose in interactive mode
+
+
+	9. docker compose logs (service names can be added)
+		- get the logs from all ervices
+
+* docker compose stop stops all the containers within an application where as docker compose down stops and removes all the containers
+
+
+
+* docker container create vs run
+	- Create command is used to create the container before hand and can be started later using docker start
+	- run command creates and runs a container with all its processes
+
+* docker container kill vs stop
+	- stop can allow safe termination (within the grace period) while kill terminates immediately.
+	- docker kill <container_name or id>
+	- docker stop <container_name or id>
+
+
+Ping container
+	- Checking if two containers are connected when they are in same network 
+	- Docker uses bridge network by default
+	- ping <container_ip>
+
+	* To get the ip address of a network: 
+		docker inspect <container id> | grep "IPAddress"
+		or 
+		hostname -I (within docker container)
+
+
+docker volume 
+	* Docker volumes can be created using - docker volume create
+		there are two flags two mount a volume
+		* --mount : if the directory to be mounted does not exist in host machine it gives an error
+		* -v : if the directory does not exists it creates one
+		
+	1. Volumes
+		Volumes are stored in a part of the host filesystem which is managed by Docker ( /var/lib/docker/volumes/ on Linux).
+		This data persists even when containers are deleted
+
+	2. Bind mount
+		Mounting a directory in the host machine to a container
+		Is dependent on a specific directory structure
+
+
+
+Read - 	
+Multi stage docker file
+kill vs stop
+
+
+
+Task-
+	1. Create a dockerfile using entrypoint, cmd and both together.
+	2. Where does the docker image, volume,  and containers get stored.
+		Docker takes a part
+	3. Create a list of the commands explored.
+	4. Read about docker network types
+		- host network
+		- overlay network
+		- Bridge network
+
+	
+	
+	5. check out docker image file
+	6. Create an env variable in a docker file and run the image with args passed
+	7. Create two docker compose files 
+		- for postgres, pgadmin, redis, services
+		- mongodb, mongodb gui, services, admin 
+
+
+Doubts-
+	- After deleting image using docker image prune -a they are showed to be untagged what does that mean
+	- How to do port mapping when container is already created.
+	- Why do we give tag name along with image name in docker compose file 
+		To do versioning
+
+	- Env var in dockerfile and docker compose file
+
+
+
+/Users/apple/Library/Containers/com.docker.docker/Data/vms/0/data
+
+
+What tool does docker use for virtualization ?
+Docker desktop architecture ?
+How to override CMD commands during runtime
+What is the command to stop all the running containers all at once
+	- docker stop $(docker ps -a -q)
+cmd vs entrypoint
+
+
+* Building an image - Containerizing an application/ creating an image
+
+
+
+
+
+

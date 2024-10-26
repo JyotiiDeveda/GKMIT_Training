@@ -1,5 +1,5 @@
 Pre-requisites for setup of a nodejs project
-1. node LTS version - npm init
+1. node LTS version - nmp init
 2. npm LTS version
 3. Server using express
 4. Initialze git repo
@@ -7,7 +7,7 @@ Pre-requisites for setup of a nodejs project
 6. .env- environment variables 
    .env.sample- as an example for .env
 7. Linter(eslint), formatter(prettier)
-	- .prettierrc, eslint.js are config files and are pushed to remote
+	- prettierrc, eslint.config.js are config files and are pushed to remote
 8. Add readme 
 9. Initial commit
 10. Folders
@@ -91,9 +91,11 @@ File naming
 	- file name: 
 		resources.helper.js - 
 		common.helper.js - helper functions are used commonly for multiple resources
+		functions which are used to break cyclic dependency between services
 
 6. Utils
 	- file name: service.js (e.g aws.js)
+	third party services
 
 7. config
 	- file name: 
@@ -128,9 +130,6 @@ Seeders(in sequalize)
 
 
 function names - camel case
-
-
-
 
 Task - 
 Add prettier and eslint in calculator app

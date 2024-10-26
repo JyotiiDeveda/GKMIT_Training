@@ -1,0 +1,54 @@
+Authorization
+	- ACL(Access control list)
+	- roles: Admin, Superwiser, PM(Project manager), user
+	- database schema-
+		* different roles for a user, different users for a role
+		* Create an ERD - draw.io
+		Create tables - constraints, 
+
+
+
+There could be two ways to design database for the permissions of a roles
+- all the permissions a role has can be stored in an array
+- permission can be a separate table that has a many to many relation with role
+
+
+ERD keypoints - 
+	* add created at, updated at for each model
+	* roles table has a key to identify a role unique other then name and description. 
+	* arrows
+	* datatypes- char, varchar, text
+
+Active ACL - at db level
+Passive ACL - at code level
+acl npm package
+
+
+
+Connecting server to mongo in different ways
+	- Server is local and mongo is running in a container: For the app to connect with mongo expose mongo port
+	- Server is running in container and mongo is local: create container using host network 
+		The app in the container will use the ports of the host i.e share network stack
+
+
+Read  
+	redis npm package
+	polymorphic association
+
+Task - 
+	Create docker image of the calculator app
+	create a docker compose file - with app and database
+
+Migration commands are also specified in dockerfile through entrypoint.sh in postgres
+RBAC
+
+
+
+
+
+
+
+
+
+
+

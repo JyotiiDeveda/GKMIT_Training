@@ -1,0 +1,37 @@
+Sequelize-------
+1. Paranoid: A flag that helps soft deleting
+Migration - up, down
+Seeders
+
+Eager loading
+	- It is like join where assocaited data is fetched all together
+Lazy loading
+	- Fires more than one db call to fetch associated data. lazy loading is used when we want associated data for a single instance.
+
+* populating in mongoose is lazy loading and aggregate is eager loading
+
+Hooks 
+	- To perform an action before or after a db operation
+	- Hooks are model specific
+
+Methods
+	Class method
+	Instance method
+
+
+Indexes in sequelize.
+Querying many to many juntion table.
+faker package.
+Implement hooks.
+
+Migrations - 
+	- It is like version control system to manage changes in source code, migrations are used to keep track of changes to db.
+	- Using migrations the current state of the database can be transferred to another state
+	- Migrations in sequelize is a js file which exports two functions- up and down
+
+
+Sequalize project setup
+- npx sequalize-cli init
+	Initialize sequelize project i.e creates folders - models, migration , config abd seeders
+
+

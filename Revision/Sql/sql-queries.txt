@@ -1,0 +1,170 @@
+-- Stacked PR-
+-- 	Creating nested branches
+-- 	Creating PR of newly created branch()compare from the origin branch(base)
+
+
+Postgres
+-- 1. Create table
+	-- - users table -> id, name
+	-- - user_cities -> id, user_id, city
+	-- * A user can live in multiple cities (one to many association)
+
+
+-- - Create users table
+	CREATE TABLE 
+		users(
+		id integer, 
+		name varchar(20), 
+		PRIMARY KEY (id));
+
+
+
+-- - Insert data in users table
+	INSERT INTO 
+		users (id, name) 
+	values 
+		(3, 'Ram'), 
+		(4, 'Sita'), 
+		(5, 'Sonu'), 
+		(6, 'Smita'), 
+		(7, 'Kanika'), 
+		(8, 'Ramesh'), 
+		(9, 'Suhasi'), 
+		(10, 'Meenu'), 
+		(111, 'Hemani'), 
+		(12, 'Riya');
+
+
+-- - Create user_cities table
+	CREATE TABLE 
+		user_cities(
+			id integer, 
+			user_id integer, 
+			city varchar(30), 
+			PRIMARY KEY (ID), 
+			FOREIGN KEY (user_id) REFERENCES users(id));
+
+
+-- - Insert data in user_cities table
+	INSERT INTO 
+		user_cities (id, user_id, city) 
+	values 
+		(11, 1, 'Udaipur'), 
+		(12, 1, 'Jaipur'), 
+		(13, 4, 'Jabalpur'), 
+		(14, 3, 'Ratlam'), 
+		(15, 3, 'Mandsaur'), 
+		(16, 5, 'Gudgaon'), 
+		(17, 7, 'Neemuch'), 
+		(18, 7, 'Indore'), 
+		(19, 8, 'Ujjain')
+
+
+
+
+-- Query
+-- 1. Get all the users that are associated to only one city.
+	select
+		users.id,
+		users.name
+	from
+		users 
+	join
+		user_cities on users.id=user_cities.user_id
+	group by
+		users.id
+	having
+		count(users.id) = 1;
+
+
+	-- using subquery
+	select 
+	    users.name
+	from 
+	    users 
+	join (
+	    select 
+	       user_id, 
+	       count(user_id) as user_cnt 
+	    from 
+	       user_cities 
+	    group by user_id 
+	    having 
+	       count(user_id) = 1) 
+	    as user_city on users.id=user_city.user_id;
+
+
+
+-- 2. Get all the users that are associated to only one city and that is 'Udaipur'.
+
+	-- using aggregation
+	select 
+		* 
+	from(
+		select
+			users.id,
+			users.name,
+			string_agg(
+				user_cities.city,
+				','
+			) cityname
+		from
+			users 
+		join
+			user_cities on users.id=user_cities.user_id
+		group by
+			users.id
+	)
+	where 
+		cityname='Udaipur';
+
+
+	-- using subquery
+	select
+		users.name, 
+	  	user_cities.city
+	from 
+		users
+	join
+		user_cities
+	on
+		users.id=user_cities.user_id
+	where 
+		users.id in
+	  (
+	    select 
+	      uc.user_id
+	    from 
+	      user_cities uc
+	    group by
+	      uc.user_id
+	    having 
+	      count(uc.user_id)=1
+	  ) and user_cities.city = 'Udaipur';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

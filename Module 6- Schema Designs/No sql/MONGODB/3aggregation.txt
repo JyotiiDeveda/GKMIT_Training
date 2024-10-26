@@ -28,7 +28,8 @@ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: 
 
 
 3. Count the fields
-db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gt: 1910}}}, {$count: "FieldCount" }])
+db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: { $gt: 1910 } } }, {$count: "FieldCount" }])
+
 
 
 4. Sort
@@ -50,8 +51,8 @@ db.movies.aggregate([ { $match: { 'year': { $lt: 1900} } }, { $sort: { 'imdb.rat
 
  8. $project
  - works like select {fieldname: 0, fieldname2: 1}
- - alias { aliasname: "$fieldname" , fieldname: 0(otherwise we will have two fields with same values)}
- db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $unwind: "$genres" }, { $project: { "countriesAlias": "$countries"}}])
+ - alias { aliasname: "$fieldname" }
+  db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $unwind: "$genres" }, { $project: { "countriesAlias": "$countries"}}])
 
 
 
@@ -66,17 +67,18 @@ db.movies.aggregate([ { $match: { 'year': { $lt: 1900} } }, { $sort: { 'imdb.rat
 
  db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $group: { _id: "$year", title: { $push: "$title"}} }])
 
- db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $group: { _id: "$year", title: { $push: "$title"}, count: {$count: {}} }}])
+ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $group: { _id: "$year", title: { $push: "$title" }, count: { $count: {} } }}])
+
 
 
 
  10. $lookup 
  - join in mongodb is called lookup
- - mongo is not optimised for relationa; operations with more than one collection
+ - mongo is not optimised for relational operations with more than one collection
  db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $lookup: { from: "comments",  foreignField: "movie_id", localField: "_id", as: "Comments"}} ])
 
 - lookup without any filtering of data is more slow
-db.movies.aggregate( [ { $lookup: { from: "comments",  foreignField: "movie_id", localField: "_id", as: "Comments"}} ])		
+db.movies.aggregate( [ { $lookup: { from: "comments",  foreignField: "movie_id", localField: "_id", as: "Comments" } } ])		
 
 - aggregate pipeline can be created within lookup
 { $lookup : {
@@ -103,6 +105,7 @@ db.movies.aggregate( [ { $lookup: { from: "comments",  foreignField: "movie_id",
 			{ $match: { 'imdb.rating': { $gt: 5 } } },{ $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} } } , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year' }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])
 
 	db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year', totalCnt: { $count: {}} }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])	
+
 
 
 Pagination
@@ -160,6 +163,20 @@ Self study
 		- accessing an element using index, filtering out fields with a condition on array element can be defined using 		indexing in queries
 		- indexing is not supported in aggregate but crud operations support array indexing
  		- e.g db.movies.find( { 'cast.1': 'John Ott' })
+
+
+--- $size works differently with normal queries and aggregation
+	- In a normal mongo query $size matches the array with given size
+		Syntax:
+			{
+				field: {
+					$size: size
+				}
+			}
+	- In aggregation $size return the size of the array field passed
+			{
+				$size: arrayField
+			}
 
 
 

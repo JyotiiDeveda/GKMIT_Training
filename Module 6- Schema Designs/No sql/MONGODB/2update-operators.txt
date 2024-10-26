@@ -53,6 +53,7 @@ CRUD Opearions
 		- removes the field from the document
 	      db.users.updateOne( { name: "Jyoti" } , { $unset : { phone: "" } })
 
+	    - $unset when used with the positional $ operator does not remove the matching element from the array but rather sets it to null.
 	    - $unset when the positional $ operator does not remove the matching element from the array but rather sets it to null.
 	    - $ acts as a placeholder for the first array element that matches the condition 
 	    	db.users.findOneAndUpdate( { progress: 'push' }, { $unset:  { "progress.$": ""}} ) 
@@ -71,7 +72,8 @@ CRUD Opearions
 	7. each is used to add or remove multiple elements from an array
 		db.users.updateOne( { _id: ObjectId("66fa89f78c73ccd33d964034") }, { $push : { progress: { $each: ["unset", "exists" ] } } } )
 
-	8. $in (increment)
+	8. $inc (increment)
+
 		db.users.updateOne( { name: "Test user" }, { $inc : { score: 3 } } )
 
 *regex
@@ -109,7 +111,7 @@ db.users.updateOne({ name: "Test user" }, { $pop: { progress: -1 } } )
 ---- Remaining update operators -----
 
 	1. $mul 
-		- upate query: { $mul: { field: number to multiply to field}}
+		- update query: { $mul: { field: number to multiply to field}}
 		- if a field passed to the $mul does not exists it creates the field set it to 0 and then multiply with given number
 
 	2. $rename - to rename a field name in the document

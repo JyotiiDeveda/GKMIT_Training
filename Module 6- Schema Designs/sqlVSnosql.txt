@@ -1,0 +1,15 @@
+sqlVSnosql.txtsql 
+	- Access patterns are known
+	- Small project
+	- Low scale
+	- Relatinal queries
+
+Nosql
+	- Large project
+	- High scale
+
+
+Micro service Architecture- Multiple databases can be used within the same appication
+
+Redis creates instance that can have multiple databases and this instance is called logical databases.
+Each individual database is isolated.

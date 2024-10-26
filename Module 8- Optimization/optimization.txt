@@ -1,0 +1,54 @@
+Optimization 
+	find solution -> optimize
+
+LLD 
+	- code
+		- Avoid unnecessary await as it makes the code wait i.e keep it in execution phase 
+		- Complexity
+		- Parallelism and concurrency
+
+		* Storage optimization
+		* Importing a package in the block it is used
+		* Use of Promises/async and parralelism
+		
+
+	- query
+		* fetch only the required fileds
+		* Use of indexes for frequently used data,  
+		* materialized views for data that is not modified frequently.
+		* Subquery execution is usd for optimization.
+
+		- Nosql
+			* avoid relational operations
+			* Indexing
+			* Efficient use of flow of execution of aggregation pipeline. 
+		
+
+
+
+HLD: Any exernal tool that optimizes the performance comes under high level optimization
+	- Redis
+	  * provides different datatypes 
+
+	- Elastic search 
+	- Infrastructure
+
+
+Response time optimization 
+
+
+
+
+Concurrency - Single thread is switching between multiple tasks to execute task asynchronously. Concurrency in nodejs is achieve using async await
+Parellelism - Two tasks are performed independently simultaneously. Multiple threads are required to use parallelism. To achieve parallelism in nodejs using modules. e.g child_process.
+
+
+Sharding is a part of scaling
+
+
+Read
+How do we achieve parallelism how does it work
+
+self ---
+1. Thread pool - A collection of pre-instantiated thread which are ready to be given work.
+

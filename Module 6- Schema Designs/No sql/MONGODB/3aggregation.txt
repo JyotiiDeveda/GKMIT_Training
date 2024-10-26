@@ -31,6 +31,7 @@ db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: 
 db.movies.aggregate( [{ $match: { 'imdb.rating': { $gte: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: { $gt: 1910 } } }, {$count: "FieldCount" }])
 
 
+
 4. Sort
 
 
@@ -70,6 +71,7 @@ db.movies.aggregate([ { $match: { 'year': { $lt: 1900} } }, { $sort: { 'imdb.rat
 
 
 
+
  10. $lookup 
  - join in mongodb is called lookup
  - mongo is not optimised for relational operations with more than one collection
@@ -102,7 +104,8 @@ db.movies.aggregate( [ { $lookup: { from: "comments",  foreignField: "movie_id",
 	db.movies.aggregate( [
 			{ $match: { 'imdb.rating': { $gt: 5 } } },{ $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} } } , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year' }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])
 
-	db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year', totalCnt: { $count: {} } }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])	
+	db.movies.aggregate( [{ $match: { 'imdb.rating': { $gt: 5 } } }, { $addFields: { average: { $avg: ['$rmdb.rating', '$tomatoes.viewer.rating' ]} }} , { $match: { year: {$gte: 1910}}}, { $sort: {average: 1}}, { $facet: { groups: [ { $group: { _id: '$year', totalCnt: { $count: {}} }}] ,  documentCnt:  [{ $count: "Cnt" }] } } ])	
+
 
 
 Pagination

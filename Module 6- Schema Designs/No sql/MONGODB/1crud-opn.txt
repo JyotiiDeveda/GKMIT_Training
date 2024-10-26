@@ -37,6 +37,7 @@ Why NoSQL?
 * Many-to-many relation is avoided in mongo 
 * operations on many to many relation using junction table are inefficient in mongodb unlike sql therefore we use pivot table that includes some frequently used columns of main table increasing redundancy but optimizing performance
 
+
 Mongo CRUD 
 	Syntax - db.collection.method()
 	1. find

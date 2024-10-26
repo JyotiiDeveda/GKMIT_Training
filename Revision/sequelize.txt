@@ -1,0 +1,25 @@
+Sequelize-------
+1. Paranoid: A flag that helps soft deleting
+Migration - up, down
+Seeders
+
+Eager loading
+	- It is like join where assocaited data is fetched all together
+Lazy loading
+	- Fires more than one db call to fetch associated data. lazy loading is used when we want associated data for a single instance.
+
+* populating in mongoose is lazy loading and aggregate is eager loading
+
+Hooks 
+	- To perform an action before or after a db operation
+	- Hooks are model specific
+
+Methods
+	Class method
+	Instance method
+
+
+Indexes in sequelize.
+Querying many to many juntion table.
+faker package.
+Implement hooks.

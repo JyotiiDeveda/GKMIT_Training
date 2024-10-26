@@ -1,0 +1,21 @@
+1. Create a leaderboard of user's score in redis
+	
+	ZADD player:score 10 "John" 20 "Jenne" 15 "David"
+
+	ZRANGE player:score 0 -1
+
+
+2. Create an array of near by geo locations and find the shortest path by EOD. Write commands in a text file for all redis tasks.
+	
+	* add geolocations
+	GEOADD hotels:location 24.62669499577544  73.7161344052248  h1:hnd
+	GEOADD hotels:location 24.628171285453245 73.70608580904224  h2:b27r
+	GEOADD hotels:location 24.62276998629339 73.72362189488884  h3:hsm	
+
+
+	* get the location which is a km away from given location
+	GEOSEARCH hotels:location FROMLONLAT 24.62391437393565 73.71739134478004 BYRADIUS 1 km WITHDIST
+	o/p
+	1) "h3:hsm"
+   	2) "0.6938"	
+

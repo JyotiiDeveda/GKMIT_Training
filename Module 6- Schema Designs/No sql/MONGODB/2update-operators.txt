@@ -54,6 +54,7 @@ CRUD Opearions
 	      db.users.updateOne( { name: "Jyoti" } , { $unset : { phone: "" } })
 
 	    - $unset when used with the positional $ operator does not remove the matching element from the array but rather sets it to null.
+	    - $unset when the positional $ operator does not remove the matching element from the array but rather sets it to null.
 	    - $ acts as a placeholder for the first array element that matches the condition 
 	    	db.users.findOneAndUpdate( { progress: 'push' }, { $unset:  { "progress.$": ""}} ) 
 
@@ -72,6 +73,7 @@ CRUD Opearions
 		db.users.updateOne( { _id: ObjectId("66fa89f78c73ccd33d964034") }, { $push : { progress: { $each: ["unset", "exists" ] } } } )
 
 	8. $inc (increment)
+
 		db.users.updateOne( { name: "Test user" }, { $inc : { score: 3 } } )
 
 *regex
@@ -144,7 +146,7 @@ $count
 
 ---- * -----
 * upsert is an option for update operation, upsert: true
-	- either updates the documents
+	- either updates the document
 	- and if it does not exist, creates a new document and insert
 	 e.g: db.users.updateOne( { name: "Upsert user" }, { $set: { description : "Upsert is an option for update operation"}}, { upsert: true } )
 

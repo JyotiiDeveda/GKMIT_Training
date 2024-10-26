@@ -54,7 +54,7 @@
 		}, 
 		{ 
 			$project: { 
-				movieTitle: '$title', 
+				movieTitle: "$title", 
 				rating: "$imdb.rating" 
 			} 
 		}

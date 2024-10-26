@@ -1,4 +1,4 @@
-
+-- Solution of problem statements on postgres practice website kept for reference 
 
 SELECT
   distinct YEAR("birth_date") as "birth_date"
@@ -17,8 +17,7 @@ from (
 where "PatientCnt" = 1;
 
 
--- 
-practice postgres
+-- practice postgres
 1.select 
     starttime 
   from cd.bookings, cd.members 

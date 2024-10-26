@@ -1,0 +1,22 @@
+AWS basics
+
+Cloud services
+	- EC2 (Amazon Elastic Compute Cloud)
+	- S3
+	- ECR
+	- Cloud watch
+Code pipeline
+Runtime logs
+Webhook - An endpoint
+Log management
+
+
+Read - 
+EC2
+onnecting containers
+
+
+Task:
+Create am HTTP server and a health check endpoint using express.js and deploy using heroku.
+create a new repo add .gitignore create a index.js
+

@@ -144,6 +144,261 @@ Postgres
 
 
 
+--- query practice solutions -------
+
+select
+	DAY(admission_date) as monthDay,
+    count(patient_id) as patient_cnt
+from
+	admissions
+group by
+	monthDay
+order by 
+	patient_cnt desc;
+    
+    
+
+SELECT EXTRACT(day from '2024-04-03');
+
+
+SELECT EXTRACT(WEEK FROM "2017-06-15");
+
+
+select
+	DAYOFMONTH(admission_date)
+from 
+	admissions;
+    
+    
+select
+	first_name,
+    last_name
+from
+	patients
+where allergies is null;
+    
+    
+select
+	first_name
+from
+	patients
+where
+	first_name like "C%";
+    
+
+
+select 
+	first_name,
+    last_name
+from
+	patients
+where
+	weight between 100 and 120;
+    
+    
+    
+update 
+	patients
+set
+	allergies='NKA'
+where
+	allergies is null;
+    
+    
+    
+select	
+	(first_name || ' ' || last_name) as full_name
+from patients;
+
+
+select
+	P.first_name,
+    P.last_name,
+    Pr.province_name 
+from 
+	patients P 
+join 
+	province_names Pr 
+on 
+	P.province_id=Pr.province_id;
+    
+    
+ 
+select
+	first_name,
+    last_name,
+    max(height)
+from
+	patients;
+    
+
+select
+	*
+from
+	patients
+where
+	patient_id in (1, 45, 534, 879, 1000);
+    
+
+select
+	count(*)
+from
+	admissions;
+    
+ 
+
+select
+	*
+from
+	admissions
+where
+	admission_date=discharge_date;
+    
+    
+select
+	patient_id,
+	count(patient_id) patient_cnt
+from
+	admissions
+where
+	patient_id = 579;
+    
+
+
+select distinct
+	city
+from
+	patients
+where 
+	province_id='NS';
+
+
+select
+	first_name,
+    last_name,
+    birth_date
+from
+	patients
+where
+	height > 160 and weight > 70;
+
+
+
+select
+	*
+from
+	admissions
+where
+	patient_id=542
+order by
+	admission_date DESC
+limit 1;
+
+
+
+select
+	patient_id,
+    attending_doctor_id,
+    diagnosis
+from 
+	admissions
+where 
+	(patient_id%2=1 and attending_doctor_id in (1, 5, 19))
+    or
+    (CHARINDEX('2', CAST(attending_doctor_id as varchar)) > 0  and DATALENGTH(CAST(patient_id as varchar))= 3);
+
+
+
+
+select
+	patient_id,
+    attending_doctor_id,
+    diagnosis
+from 
+	admissions
+where 
+	(patient_id%2=1 and attending_doctor_id in (1, 5, 19))
+    or
+    (CHARINDEX('2', CAST(attending_doctor_id as varchar)) > 0  and DATALENGTH(CAST(patient_id as varchar))= 3);
+    
+    
+    
+select
+	D.first_name,
+    D.last_name,
+    count(doctor_id) as admissions_cnt
+from
+	doctors D
+join
+	admissions A
+on D.doctor_id=A.attending_doctor_id
+group by
+	doctor_id;
+
+
+
+   
+    
+select
+	D.doctor_id AS id,
+	(D.first_name || ' ' || D.last_name) as fullname,
+    MIN(admission_date) as first_adm_date,
+    max(admission_date) as last_adm_date
+from
+	doctors D
+join
+	admissions A
+on D.doctor_id=A.attending_doctor_id
+group by
+	doctor_id;
+    
+    
+   
+   
+select 
+	Pr.province_name as name,
+    count(P.patient_id) as patient_cnt
+from
+	province_names Pr 
+join
+	patients P on Pr.province_id=P.province_id
+group by
+	Pr.province_id
+order by
+	patient_cnt desc;
+
+
+
+
+select	
+	(P.first_name || ' ' || P.last_name) as patients_fullname,
+    A.diagnosis as diagnosis,
+    (D.first_name || ' ' || D.last_name) as doctors_fullname
+from
+	patients P 
+join
+	admissions A on P.patient_id=A.patient_id
+join
+	doctors D on A.attending_doctor_id=D.doctor_id;
+    
+
+
+select
+	day(admission_date) as dayNum,
+    count(*) as admission_cnt
+from
+	admissions
+group by
+	day(admission_date)
+order by
+	admission_cnt desc;
+
+
+
+
+
+
+
 
 
 

@@ -32,6 +32,37 @@ Migrations -
 
 Sequalize project setup
 - npx sequalize-cli init
-	Initialize sequelize project i.e creates folders - models, migration , config abd seeders
+	Initialize sequelize project i.e creates folders - models, migration , config abd 
+
+
+
+steps to set up sequelize-app
+1. Database Connection
+	- Create a sequelize instance using database credentials
+	- authenticate connection
+
+2. Initialize a sequelize app 
+	- npx sequelize-cli init
+	- This will create following folders: config, models, migrations, seeders
+
+2. Generate models and migrations
+	- npx sequelize-cli model:generate --name modelName --attributes key:value,key:value
+
+3. Define up and down methods in migrations 
+4. And accordingly create models
+5. Run migrations
+	- npx sequelize-cli db:migrate
+	- This will create tables within database
+
+6. Generate seeders and run them 
+	- npx sequelize-cli seed:generate --name seedName
+	- npx sequelize-cli db:seed:all
+	- npx sequelize-cli db:seed:undo --- to undo seeding
+
+* when we customize the name of config.json in config folder to some other name like config.js we need to configure .sequelizerc file
+
+
+
+
 
 
